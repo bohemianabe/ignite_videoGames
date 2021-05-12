@@ -3,12 +3,14 @@ import styled from "styled-components"
 import {motion} from 'framer-motion'
 // redux
 import {useSelector} from 'react-redux'
-import { gameDetailsUrl } from "../api";
+// import { gameDetailsUrl } from "../api";
 
 const GameDetail = () => {
     // data
-    const {screen, game} = useSelector((state) => state.detail);
+    const {screen, game, isLoading} = useSelector((state) => state.detail);
     return(
+        <>
+        {!isLoading && ( 
         <CardShadow className="card-shadow">
             <Detail className="detail">
                 <Stats className="stats">
@@ -38,6 +40,8 @@ const GameDetail = () => {
                 </div>
             </Detail>
         </CardShadow>
+        )}
+        </>
     )
 }
 
