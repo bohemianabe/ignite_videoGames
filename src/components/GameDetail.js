@@ -4,21 +4,31 @@ import {motion} from 'framer-motion'
 // redux
 import {useSelector} from 'react-redux'
 // import { gameDetailsUrl } from "../api";
+import {useHistory} from 'react-router-dom';
 
 const GameDetail = () => {
+    const history = useHistory();
+    // exit detail
+    const exitDetailHander = (e) => {
+        const element = e.target;
+        if(element.classList.contains('shadow')){
+            document.body.style.overflow = 'auto';
+            history.push('/')
+        }
+    }
     // data
     const {screen, game, isLoading} = useSelector((state) => state.detail);
     return(
         <>
         {!isLoading && ( 
-        <CardShadow className="card-shadow">
-            <Detail className="detail">
-                <Stats className="stats">
+        <CardShadow className="shadow" onClick={exitDetailHander}>
+            <Detail >
+                <Stats>
                     <div className="rating">
                         <h3> {game.name} </h3>
                         <p>Rating: {game.rating}</p>
                     </div>
-                    <Info className="info">
+                    <Info>
                         <h3>Platforms</h3>
                         <Platforms className="platforms">
                             {game.platforms.map(data => (
@@ -27,7 +37,7 @@ const GameDetail = () => {
                         </Platforms>
                     </Info>
                 </Stats>
-                <Media className="media">
+                <Media>
                     <img src={game.background_image} alt="image" />
                 </Media>
                 <Description className="description">
