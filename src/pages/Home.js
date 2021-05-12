@@ -3,6 +3,7 @@ import {loadGames} from '../actions/gamesAction';
 import {useEffect} from 'react';
 // components
 import Game from '../components/Game'
+import GameDetail from '../components/GameDetail'
 // style and animation
 import styled from 'styled-components'
 import {motion} from 'framer-motion'
@@ -20,6 +21,7 @@ const Home = () => {
      
     return (
         <GameList>
+            <GameDetail />
             <h2>Upcoming Games</h2>
             <Games>
                 {upcoming.map(game => (
@@ -32,6 +34,31 @@ const Home = () => {
                     />
                 ))}
             </Games>
+            <h2>Popular Games</h2>
+            <Games>
+                {popular.map(game => (
+                    <Game
+                    name={game.name}
+                    released={game.released}
+                    id={game.id}
+                    image={game.background_image}
+                    key={game.id}
+                    />
+                ))}
+            </Games>
+            <h2>New Games</h2>
+            <Games>
+                {newGames.map(game => (
+                    <Game
+                    name={game.name}
+                    released={game.released}
+                    id={game.id}
+                    image={game.background_image}
+                    key={game.id}
+                    />
+                ))}
+            </Games>
+
         </GameList>
     )
 };
