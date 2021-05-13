@@ -6,6 +6,13 @@ import {useSelector} from 'react-redux'
 // import { gameDetailsUrl } from "../api";
 import {useHistory} from 'react-router-dom';
 import {smallImage} from '../util'
+// image
+import playstation from '../img/playstation.svg';
+import steam from '../img/steam.svg';
+import xbox from '../img/xbox.svg';
+import nintendo from '../img/nintendo.svg';
+import apple from '../img/apple.svg';
+import gamepad from '../img/gamepad.svg';
 
 const GameDetail = ({pathId}) => {
     const history = useHistory();
@@ -15,6 +22,23 @@ const GameDetail = ({pathId}) => {
         if(element.classList.contains('shadow')){
             document.body.style.overflow = 'auto';
             history.push('/')
+        }
+    }
+    // get platform images
+    const getPlatform = (platform) => {
+        switch(platform){
+            case "Playstation 4":
+                return playstation;
+            case "Xbox One":
+                return xbox;
+            case "PC":
+                return steam;
+            case "Nintendo Switch":
+                return nintendo;
+            case "iOS":
+                return apple;
+            default:
+                return gamepad;
         }
     }
     // data
@@ -33,7 +57,7 @@ const GameDetail = ({pathId}) => {
                         <h3>Platforms</h3>
                         <Platforms className="platforms">
                             {game.platforms.map(data => (
-                                <h3 key={data.platform.id} >{data.platform.name}</h3>
+                                <img key={data.platform.id} src={getPlatform(data.platform.name)} />
                             ))}
                         </Platforms>
                     </Info>
@@ -67,15 +91,14 @@ const CardShadow = styled(motion.div)`
     z-index: 1; 
     &::-webkit-scrollbar{
         width: 0.5rem;
-        
     }
+
     &::-webkit-scrolbar-thumb{
        background-color: #ff7676; 
-
     }
+
     &::-webkit-scrollba-track{
         background: white;
-
     }
 `;
 
